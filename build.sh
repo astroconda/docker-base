@@ -1,6 +1,6 @@
 #!/bin/bash
 set -x
-HUB=${3:-astroconda}
+HUB=${2:-astroconda}
 PROJECT=${HUB}/base
 PROJECT_VERSION="${1}"
 TAGS=()

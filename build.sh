@@ -40,6 +40,13 @@ if [[ -n ${is_tag_latest} ]]; then
 fi
 
 docker build ${TAGS[@]} .
+rv=$?
+
+if (( rv > 0 )); then
+    echo "Failed... Image not published"
+    exit $?
+fi
+
 
 max_retry=4
 retry=0

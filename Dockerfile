@@ -2,6 +2,11 @@ FROM centos:6.9
 LABEL maintainer="jhunk@stsci.edu" \
       vendor="Space Telescope Science Institute"
 
+ARG USER_ACCT=${USER_ACCT:-developer}
+ARG USER_HOME=/home/${USER_ACCT}
+ARG USER_UID=${USER_UID:-1000}
+ARG USER_GID=${USER_GID:-1000}
+
 ENV TOOLCHAIN="/opt/toolchain"
 ENV TOOLCHAIN_BIN="${TOOLCHAIN}/bin"
 ENV TOOLCHAIN_LIB="${TOOLCHAIN}/lib"
@@ -12,21 +17,14 @@ ENV TOOLCHAIN_MAN="${TOOLCHAIN_DATA}/man"
 ENV TOOLCHAIN_PKGCONFIG="${TOOLCHAIN_LIB}/pkgconfig"
 ENV TOOLCHAIN_BUILD="/opt/buildroot"
 
-ENV PATH="${TOOLCHAIN_BIN}:${PATH}"
-ENV CFLAGS="-I${TOOLCHAIN_INCLUDE}"
-ENV LDFLAGS="-L${TOOLCHAIN_LIB} -Wl,-rpath=${TOOLCHAIN_LIB}"
-ENV PKG_CONFIG_PATH="${TOOLCHAIN_PKGCONFIG}"
-
-ARG PYTHON_VERSION=${PYTHON_VERSION:-3.7.1}
-ARG USER_ACCT=${USER_ACCT:-developer}
-ARG USER_HOME=/home/${USER_ACCT}
-ARG USER_UID=${USER_UID:-1000}
-ARG USER_GID=${USER_GID:-1000}
-
 ENV USER_ACCT=${USER_ACCT} \
     USER_HOME=${USER_HOME} \
     USER_UID=${USER_UID} \
     USER_GID=${USER_GID} \
+    PATH="${TOOLCHAIN_BIN}:${PATH}" \
+    CFLAGS="-I${TOOLCHAIN_INCLUDE}" \
+    LDFLAGS="-L${TOOLCHAIN_LIB} -Wl,-rpath=${TOOLCHAIN_LIB}" \
+    PKG_CONFIG_PATH="${TOOLCHAIN_PKGCONFIG}" \
     LC_ALL=en_US.UTF-8 \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
@@ -44,7 +42,7 @@ RUN groupadd -g ${USER_GID} ${USER_ACCT} \
         gcc \
         gcc-c++ \
         gcc-gfortran \
-        glibc \
+        glibc-devel \
         make \
         perl \
         pkgconfig \
@@ -52,6 +50,7 @@ RUN groupadd -g ${USER_GID} ${USER_ACCT} \
         wget \
         which \
         zlib-devel \
+        xz \
     && yum clean all
 
 WORKDIR "${TOOLCHAIN_BUILD}"

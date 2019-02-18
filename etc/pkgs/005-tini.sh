@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -xe
 
 sudo yum install -y cmake glibc-static || exit 1
 git clone https://github.com/krallin/tini.git

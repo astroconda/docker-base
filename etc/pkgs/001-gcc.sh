@@ -1,5 +1,6 @@
-#!/bin/bash -e
-set -x
+#!/bin/bash
+set -xe
+
 name=gcc
 version=8.2.0
 url=http://mirrors-usa.go-parts.com/gcc/releases/${name}-${version}/${name}-${version}.tar.gz

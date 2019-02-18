@@ -1,4 +1,6 @@
-#!/bin/bash -x
+#!/bin/bash
+set -xe
+
 name=binutils
 version=2.31.1
 url=https://ftp.gnu.org/gnu/binutils/${name}-${version}.tar.gz

@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -xe
 
 name=node
 version=v10.15.0

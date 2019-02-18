@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+set -xe
 
 name="openssl"
 version="1.1.0j"

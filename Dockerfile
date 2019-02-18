@@ -33,24 +33,27 @@ RUN groupadd -g ${USER_GID} ${USER_ACCT} \
     && useradd -u ${USER_UID} -g ${USER_ACCT} \
        -m -d ${USER_HOME} -s /bin/bash ${USER_ACCT} \
     && echo "${USER_ACCT}:${USER_ACCT}" | chpasswd \
-    && echo "${USER_ACCT} ALL=(ALL)	NOPASSWD: ALL" >> /etc/sudoers \
+    && echo "${USER_ACCT} ALL=(ALL)    NOPASSWD: ALL" >> /etc/sudoers \
     && echo export PATH="${TOOLCHAIN_BIN}:\${PATH}" > /etc/profile.d/toolchain.sh \
     && echo export MANPATH="${TOOLCHAIN_MAN}:\${MANPATH}" >> /etc/profile.d/toolchain.sh \
     && echo export PKG_CONFIG_PATH="${TOOLCHAIN_PKGCONFIG}:\${PKG_CONFIG_PATH}" >> /etc/profile.d/toolchain.sh \
     && yum install -y epel-release \
     && yum install -y \
+        bzip2-devel \
         gcc \
         gcc-c++ \
         gcc-gfortran \
+        git \
         glibc-devel \
         make \
         perl \
         pkgconfig \
         sudo \
+        unzip \
         wget \
         which \
-        zlib-devel \
         xz \
+        zlib-devel \
     && yum clean all
 
 WORKDIR "${TOOLCHAIN_BUILD}"

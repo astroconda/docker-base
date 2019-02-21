@@ -1,5 +1,4 @@
 #!/bin/bash
-set -x
 HUB=${2:-astroconda}
 PROJECT=${HUB}/base
 PROJECT_VERSION="${1}"
@@ -30,6 +29,7 @@ case "${HUB}" in
         docker login
         ;;
 esac
+set -x
 
 TAGS+=( "-t ${PROJECT}:${PROJECT_VERSION}" )
 is_tag_latest=$([[ -f LATEST ]] && [[ $(<LATEST) == ${PROJECT_VERSION} ]] && echo yes)

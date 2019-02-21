@@ -1,6 +1,6 @@
 #!/bin/bash
 HUB=${2:-astroconda}
-PROJECT=${HUB}/base
+PROJECT=${HUB}/datb-tc-base
 PROJECT_VERSION="${1}"
 TAGS=()
 

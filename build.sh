@@ -3,6 +3,13 @@ HUB=${2:-astroconda}
 PROJECT=${HUB}/datb-tc-base
 PROJECT_VERSION="${1}"
 TAGS=()
+EXTRA=()
+SNAPSHOT=${SNAPSHOT:-}
+
+if [[ -n ${SNAPSHOT} ]]; then
+    EXTRA+=( "--no-cache" )
+    EXTRA+=( "--pull" )
+fi
 
 if [[ -z ${PROJECT_VERSION} ]]; then
     echo "Project version required [e.g. 1.2.3... \$(git describe)]"
@@ -39,7 +46,9 @@ if [[ -n ${is_tag_latest} ]]; then
     TAGS+=( "-t ${PROJECT}:${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}" )
 fi
 
-docker build ${TAGS[@]} .
+docker build \
+    ${EXTRA[@]} \
+    ${TAGS[@]} .
 rv=$?
 
 if (( rv > 0 )); then

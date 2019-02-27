@@ -2,7 +2,7 @@
 set -xe
 
 name=binutils
-version=2.31.1
+version=2.32
 url=https://ftp.gnu.org/gnu/binutils/${name}-${version}.tar.gz
 
 curl -LO ${url}

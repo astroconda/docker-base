@@ -29,15 +29,7 @@ ENV USER_ACCT=${USER_ACCT} \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8
 
-RUN groupadd -g ${USER_GID} ${USER_ACCT} \
-    && useradd -u ${USER_UID} -g ${USER_ACCT} \
-       -m -d ${USER_HOME} -s /bin/bash ${USER_ACCT} \
-    && echo "${USER_ACCT}:${USER_ACCT}" | chpasswd \
-    && echo "${USER_ACCT} ALL=(ALL)    NOPASSWD: ALL" >> /etc/sudoers \
-    && echo export PATH="${TOOLCHAIN_BIN}:\${PATH}" > /etc/profile.d/toolchain.sh \
-    && echo export MANPATH="${TOOLCHAIN_MAN}:\${MANPATH}" >> /etc/profile.d/toolchain.sh \
-    && echo export PKG_CONFIG_PATH="${TOOLCHAIN_PKGCONFIG}:\${PKG_CONFIG_PATH}" >> /etc/profile.d/toolchain.sh \
-    && yum install -y epel-release \
+RUN yum install -y epel-release \
     && yum install -y \
         bzip2-devel \
         gcc \
@@ -54,7 +46,15 @@ RUN groupadd -g ${USER_GID} ${USER_ACCT} \
         which \
         xz \
         zlib-devel \
-    && yum clean all
+    && yum clean all \
+    && groupadd -g ${USER_GID} ${USER_ACCT} \
+    && useradd -u ${USER_UID} -g ${USER_ACCT} \
+       -m -d ${USER_HOME} -s /bin/bash ${USER_ACCT} \
+    && echo "${USER_ACCT}:${USER_ACCT}" | chpasswd \
+    && echo "${USER_ACCT} ALL=(ALL)    NOPASSWD: ALL" > /etc/sudoers.d/developer \
+    && echo export PATH="${TOOLCHAIN_BIN}:\${PATH}" > /etc/profile.d/toolchain.sh \
+    && echo export MANPATH="${TOOLCHAIN_MAN}:\${MANPATH}" >> /etc/profile.d/toolchain.sh \
+    && echo export PKG_CONFIG_PATH="${TOOLCHAIN_PKGCONFIG}:\${PKG_CONFIG_PATH}" >> /etc/profile.d/toolchain.sh
 
 WORKDIR "${TOOLCHAIN_BUILD}"
 COPY scripts/ ${TOOLCHAIN_BUILD}/bin

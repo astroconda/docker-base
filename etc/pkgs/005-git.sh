@@ -11,8 +11,10 @@ tar xf ${name}-${version}.tar.xz
 pushd ${name}-${version}
     make configure
     ./configure --prefix=${TOOLCHAIN} \
+        --libexecdir=${TOOLCHAIN_LIB}/git \
         --with-curl \
         --with-openssl=${TOOLCHAIN}
     make -j${_maxjobs}
-    make install-strip
+    make strip
+    make install
 popd

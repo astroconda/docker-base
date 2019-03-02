@@ -31,11 +31,13 @@ ENV USER_ACCT=${USER_ACCT} \
 
 RUN yum install -y epel-release \
     && yum install -y \
+        autoconf \
+        automake \
         bzip2-devel \
         gcc \
         gcc-c++ \
         gcc-gfortran \
-        git \
+        gettext \
         glibc-devel \
         make \
         perl \

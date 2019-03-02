@@ -39,6 +39,7 @@ RUN yum install -y epel-release \
         gcc-gfortran \
         gettext \
         glibc-devel \
+        libcurl-devel \
         make \
         perl \
         pkgconfig \

@@ -20,6 +20,7 @@ pushd binutils
         --enable-ld=default \
         --enable-plugins \
         --enable-threads \
+        --enable-compressed-debug-sections=none \
         --disable-static \
         --disable-multilib \
         --with-sysroot=/ \

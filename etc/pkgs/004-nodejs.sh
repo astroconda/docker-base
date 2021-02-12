@@ -1,6 +1,9 @@
 #!/bin/bash
 set -xe
 
+# Disabled
+exit 0
+
 name=node
 version=v10.15.0
 srcdir=${name}-${version}

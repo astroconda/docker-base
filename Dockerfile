@@ -1,4 +1,4 @@
-FROM centos:6.9
+FROM centos:7
 LABEL maintainer="jhunk@stsci.edu" \
       vendor="Space Telescope Science Institute"
 
@@ -33,6 +33,7 @@ RUN yum install -y epel-release \
     && yum install -y \
         autoconf \
         automake \
+        bzip2 \
         bzip2-devel \
         gcc \
         gcc-c++ \

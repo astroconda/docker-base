@@ -2,8 +2,8 @@
 set -xe
 
 name=gcc
-version=8.2.0
-url=http://mirrors-usa.go-parts.com/gcc/releases/${name}-${version}/${name}-${version}.tar.gz
+version=8.4.0
+url=http://mirrors.concertpass.com/gcc/releases/${name}-${version}/${name}-${version}.tar.gz
 src=${name}-${version}
 bld=${src}_build
 
